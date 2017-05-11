@@ -1,1 +1,1 @@
-![](https://github.com/Knowledge91/cs193p-ios10-solutions/blob/master/Assigment%201/1.gif)
+![](https://giphy.com/gifs/3o7btXsUyTzxXRFPZ6/html5)
