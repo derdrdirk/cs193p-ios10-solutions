@@ -141,7 +141,9 @@ class CalculatorBrain {
     }
     
     func undo() {
-        internalProgram.removeLast()
+        if(internalProgram.count >= 1) {
+            internalProgram.removeLast()
+        }
     }
     
     var result: Double {
@@ -158,7 +160,7 @@ class CalculatorBrain {
             self.accumulator = 0
             self.descriptionAccumulator = " "
             pending = nil
-            print("----")
+
             for entry in internalProgram {
                 print(entry)
                 if let operand = Double(entry) {
