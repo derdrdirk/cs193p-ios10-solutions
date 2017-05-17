@@ -1,2 +1,2 @@
 # Assignment 3: Graphing Calculator
-![](https://media.giphy.com/media/3og0IClsxKBV6nOM9O/giphy.gif)
+![](https://media.giphy.com/media/xUPGcvDbTLvm1K9q4E/giphy.gif)

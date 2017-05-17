@@ -407,6 +407,7 @@
                         <outlet property="Display" destination="1ln-Mj-TmT" id="09E-1b-95I"/>
                         <outlet property="MDisplay" destination="8Eg-S8-u2U" id="3C8-Wl-J2W"/>
                         <outlet property="descriptionDisplay" destination="P3T-91-DSP" id="wxr-d1-Z9D"/>
+                        <outlet property="graphButton" destination="XLN-0E-0Uu" id="zuj-ts-Ptz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

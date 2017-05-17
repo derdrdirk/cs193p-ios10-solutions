@@ -13,11 +13,19 @@ class CalculatorViewController: UIViewController {
     @IBOutlet weak var display: UILabel!
     @IBOutlet weak var descriptionDisplay: UILabel!
     @IBOutlet weak var MDisplay: UILabel!
+    @IBOutlet weak var graphButton: UIButton!
     
     func updateUI() {
-        let (result, _, description) = brain.evaluate()
+        let (result, isPending, description) = brain.evaluate()
         displayValue = result!
         descriptionDisplay.text = description
+        
+        // activate / desactivate graphButton
+        if(!isPending) {
+            graphButton.setTitle("📈", for: .normal)
+        } else {
+            graphButton.setTitle("🛑", for: .normal)
+        }
     }
     
     var userIsInTheMiddleOfTyping : Bool = false
@@ -111,10 +119,11 @@ class CalculatorViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        var destinationViewController = segue.destination
+        let destinationViewController = segue.destination
         if let navigationController = destinationViewController as? UINavigationController {
-            if let faceViewController = navigationController.visibleViewController as? GraphViewController {
-                faceViewController.function = {
+            if let graphViewController = navigationController.visibleViewController as? GraphViewController {
+                graphViewController.navigationItem.title = brain.description
+                graphViewController.function = {
                     (x: CGFloat) -> CGFloat in
                         self.brain.variableValues["M"] = Double(x)
                     let (result, _, _) = self.brain.evaluate()

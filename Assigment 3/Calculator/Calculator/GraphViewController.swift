@@ -34,5 +34,28 @@ class GraphViewController: UIViewController {
         }
     }
     
+    
+    // Load/Safe some settings
+    override func viewWillAppear(_ animated: Bool) {
+        if let loadedScale = UserDefaults.standard.value(forKey: "graph_scale") {
+            graphView.scale = CGFloat(loadedScale as! Double)
+        }
+        if let loadedOriginX = UserDefaults.standard.value(forKey: "graph_origin_x") {
+            if let loadedOriginY = UserDefaults.standard.value(forKey: "graph_origin_y") {
+                let origin = CGPoint(x: loadedOriginX as! Double, y: loadedOriginY as! Double)
+                graphView.origin = origin
+            }
+        }
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        UserDefaults.standard.setValue(Double(graphView.scale), forKey: "graph_scale")
+        UserDefaults.standard.setValue(Double(graphView.origin.x), forKey: "graph_origin_x")
+        UserDefaults.standard.setValue(Double(graphView.origin.y), forKey: "graph_origin_y")
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        graphView.setNeedsDisplay()
+    }
+    
     var function: ((CGFloat) -> CGFloat)?
 }
