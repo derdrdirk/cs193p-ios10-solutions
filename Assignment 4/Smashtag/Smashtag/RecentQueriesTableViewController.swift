@@ -31,6 +31,19 @@ class RecentQueriesTableViewController: UITableViewController {
         return cell
     }
     
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let cell = tableView.cellForRow(at: indexPath)
+            if let recentQueryCell = cell as? RecentQueryTableViewCell,
+                let query = recentQueryCell.recentQuery {
+                tableView.beginUpdates()
+                RecentQueries.remove(query: query)
+                tableView.deleteRows(at: [indexPath], with: .automatic)
+                tableView.endUpdates()
+            }
+        }
+    }
+    
     // MARK: - Livecycle
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(false)

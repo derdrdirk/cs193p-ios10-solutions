@@ -36,4 +36,14 @@ struct RecentQueries {
     public static func get()->[String] {
         return defaults.stringArray(forKey: key) ?? [String]()
     }
+    
+    public static func remove(query: String) {
+        var recentQueries = get()
+
+        if let index = recentQueries.index(of: query) {
+            recentQueries.remove(at: index)
+            defaults.set(recentQueries, forKey: key)
+        }
+    }
+    
 }

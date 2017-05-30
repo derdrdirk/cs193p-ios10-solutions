@@ -16,6 +16,9 @@
 		D4A5F6EF1ED9E94200387255 /* RecentQueries.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A5F6EE1ED9E94200387255 /* RecentQueries.swift */; };
 		D4A5F6F11ED9F3C900387255 /* RecentQueriesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A5F6F01ED9F3C900387255 /* RecentQueriesTableViewController.swift */; };
 		D4A5F6F31ED9F46D00387255 /* RecentQueryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A5F6F21ED9F46D00387255 /* RecentQueryTableViewCell.swift */; };
+		D4C1C2581EDC64EF00403FB3 /* NavigationToRootViewButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C1C2571EDC64EF00403FB3 /* NavigationToRootViewButton.swift */; };
+		D4C1C25A1EDCB80F00403FB3 /* ImageSearchCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C1C2591EDCB80F00403FB3 /* ImageSearchCollectionViewController.swift */; };
+		D4C1C25C1EDCB83500403FB3 /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C1C25B1EDCB83500403FB3 /* ImageCollectionViewCell.swift */; };
 		EC7D5EBF1E4BF94B009A2E85 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7D5EBE1E4BF94B009A2E85 /* AppDelegate.swift */; };
 		EC7D5EC41E4BF94B009A2E85 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC7D5EC21E4BF94B009A2E85 /* Main.storyboard */; };
 		EC7D5EC61E4BF94B009A2E85 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EC7D5EC51E4BF94B009A2E85 /* Assets.xcassets */; };
@@ -47,6 +50,9 @@
 		D4A5F6EE1ED9E94200387255 /* RecentQueries.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecentQueries.swift; sourceTree = "<group>"; };
 		D4A5F6F01ED9F3C900387255 /* RecentQueriesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecentQueriesTableViewController.swift; sourceTree = "<group>"; };
 		D4A5F6F21ED9F46D00387255 /* RecentQueryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecentQueryTableViewCell.swift; sourceTree = "<group>"; };
+		D4C1C2571EDC64EF00403FB3 /* NavigationToRootViewButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationToRootViewButton.swift; sourceTree = "<group>"; };
+		D4C1C2591EDCB80F00403FB3 /* ImageSearchCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageSearchCollectionViewController.swift; sourceTree = "<group>"; };
+		D4C1C25B1EDCB83500403FB3 /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		EC7D5EBB1E4BF94B009A2E85 /* Smashtag.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Smashtag.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC7D5EBE1E4BF94B009A2E85 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EC7D5EC31E4BF94B009A2E85 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -69,6 +75,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D4C1C25D1EDD421800403FB3 /* ImageSearch */ = {
+			isa = PBXGroup;
+			children = (
+				D4C1C2591EDCB80F00403FB3 /* ImageSearchCollectionViewController.swift */,
+				D4C1C25B1EDCB83500403FB3 /* ImageCollectionViewCell.swift */,
+			);
+			name = ImageSearch;
+			sourceTree = "<group>";
+		};
+		D4C1C25E1EDD422C00403FB3 /* Recent Queries */ = {
+			isa = PBXGroup;
+			children = (
+				D4A5F6EE1ED9E94200387255 /* RecentQueries.swift */,
+				D4A5F6F01ED9F3C900387255 /* RecentQueriesTableViewController.swift */,
+				D4A5F6F21ED9F46D00387255 /* RecentQueryTableViewCell.swift */,
+			);
+			name = "Recent Queries";
+			sourceTree = "<group>";
+		};
 		EC7D5EB21E4BF94B009A2E85 = {
 			isa = PBXGroup;
 			children = (
@@ -91,14 +116,14 @@
 			children = (
 				D401DEFA1ED9CEE6008238AC /* ImageViewController.swift */,
 				EC7D5ED11E4BF992009A2E85 /* TweetTableViewController.swift */,
-				D4A5F6EE1ED9E94200387255 /* RecentQueries.swift */,
-				EC7D5EC21E4BF94B009A2E85 /* Main.storyboard */,
-				D496D7121ED8978500B10F47 /* MentionTableViewController.swift */,
-				D4650C131ED969B600356CF8 /* MentionKeywordTableViewCell.swift */,
-				D4A5F6F21ED9F46D00387255 /* RecentQueryTableViewCell.swift */,
-				D496D7141ED8994C00B10F47 /* MetionImageTableViewCell.swift */,
 				EC7D5ED71E4C0239009A2E85 /* TweetTableViewCell.swift */,
-				D4A5F6F01ED9F3C900387255 /* RecentQueriesTableViewController.swift */,
+				EC7D5EC21E4BF94B009A2E85 /* Main.storyboard */,
+				D4C1C25D1EDD421800403FB3 /* ImageSearch */,
+				D4C1C2571EDC64EF00403FB3 /* NavigationToRootViewButton.swift */,
+				D496D7121ED8978500B10F47 /* MentionTableViewController.swift */,
+				D496D7141ED8994C00B10F47 /* MetionImageTableViewCell.swift */,
+				D4650C131ED969B600356CF8 /* MentionKeywordTableViewCell.swift */,
+				D4C1C25E1EDD422C00403FB3 /* Recent Queries */,
 				EC7D5ECA1E4BF94B009A2E85 /* Info.plist */,
 				EC7D5ED01E4BF956009A2E85 /* Supporting Files */,
 			);
@@ -191,7 +216,10 @@
 			files = (
 				D496D7131ED8978500B10F47 /* MentionTableViewController.swift in Sources */,
 				EC7D5EBF1E4BF94B009A2E85 /* AppDelegate.swift in Sources */,
+				D4C1C25C1EDCB83500403FB3 /* ImageCollectionViewCell.swift in Sources */,
 				D4650C141ED969B600356CF8 /* MentionKeywordTableViewCell.swift in Sources */,
+				D4C1C2581EDC64EF00403FB3 /* NavigationToRootViewButton.swift in Sources */,
+				D4C1C25A1EDCB80F00403FB3 /* ImageSearchCollectionViewController.swift in Sources */,
 				D401DEFB1ED9CEE6008238AC /* ImageViewController.swift in Sources */,
 				D496D7151ED8994C00B10F47 /* MetionImageTableViewCell.swift in Sources */,
 				D4A5F6EF1ED9E94200387255 /* RecentQueries.swift in Sources */,

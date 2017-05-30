@@ -51,7 +51,12 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate
     // just creates a Twitter.Request
     // that finds tweets that match our searchText
     private func twitterRequest() -> Twitter.Request? {
-        if let query = searchText, !query.isEmpty {
+        if var query = searchText, !query.isEmpty {
+            // if search for user append profil search "from:screenName"
+            if query.hasPrefix("@") {
+                query.remove(at: query.startIndex)
+                query = "from: \(query) OR @\(query)"
+            }
             return Twitter.Request(search: query, count: 100)
         }
         return nil
@@ -101,6 +106,8 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate
         tableView.rowHeight = UITableViewAutomaticDimension
         // the row height could alternatively be set
         // using the UITableViewDelegate method heightForRowAt
+        
+        addPopToRootButton()
     }
     
     // MARK: Search Text Field
@@ -162,12 +169,31 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate
         return "\(tweets.count-section)"
     }
     
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let frame: CGRect = tableView.frame
+        let imageBtn = UIButton(frame: CGRect(x: 0, y: 0, width: frame.size.height, height: 20))
+        imageBtn.setTitle("\(tweets.count-section) - cam", for: .normal)
+        imageBtn.backgroundColor = UIColor.gray
+        imageBtn.addTarget(self, action: #selector(segueToImageSearch(sender:)), for: .touchUpInside)
+        let sectionView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: frame.size.height, height: frame.size.width))
+        sectionView.addSubview(imageBtn)
+        return sectionView
+    }
+    
+    func segueToImageSearch(sender: UIButton) {
+        performSegue(withIdentifier: "imageSearchSegue", sender: self)
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let mentionTableViewController = segue.destination as? MentionTableViewController {
             if let tweetTableViewCell = sender as? TweetTableViewCell {
                 let tweet = tweetTableViewCell.tweet
                 mentionTableViewController.tweet = tweet
             }
+        }
+        if let imageSearchCollection = segue.destination as? ImageSearchCollectionViewController {
+            imageSearchCollection.tweets = tweets
+            
         }
     }
 }

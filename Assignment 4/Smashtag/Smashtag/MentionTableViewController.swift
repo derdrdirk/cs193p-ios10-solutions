@@ -8,10 +8,18 @@
 
 import UIKit
 import Twitter
+import SafariServices
 
 class MentionTableViewController: UITableViewController {
     
     // MARK: Model
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        addPopToRootButton()
+    }
+    
     
     private var mentions = [Mentions]()
     
@@ -32,32 +40,22 @@ class MentionTableViewController: UITableViewController {
                 mentions.append(Mentions(title: "Images", data: images.map {MentionItem.Image($0.url, $0.aspectRatio) }))
             }
             if let hastags = tweet?.hashtags, !tweet!.hashtags.isEmpty {
-                mentions.append(Mentions(title: "Hastags", data: hastags.map { MentionItem.Keyword($0.keyword) }))
+                mentions.append(Mentions(title: "Hashtags", data: hastags.map { MentionItem.Keyword($0.keyword) }))
             }
             if let urls = tweet?.urls, !tweet!.urls.isEmpty {
                 mentions.append(Mentions(title: "Urls", data: urls.map { MentionItem.Keyword($0.keyword) }))
             }
-            if let users = tweet?.userMentions, !tweet!.userMentions.isEmpty {
-                mentions.append(Mentions(title: "Users", data: users.map { MentionItem.Keyword($0.keyword) }))
+            
+            if let userScreenName = tweet?.user.screenName {
+                // append Tweet owner itself
+                var userMentionItems: [MentionItem] = [MentionItem.Keyword("@\(userScreenName)")]
+                if let users = tweet?.userMentions, !tweet!.userMentions.isEmpty {
+                    userMentionItems.append(contentsOf: users.map { MentionItem.Keyword($0.keyword) })
+                    mentions.append(Mentions(title: "Users", data: userMentionItems))
+                }
             }
         }
     }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
     
     // MARK: - Table view data source
 
@@ -102,39 +100,50 @@ class MentionTableViewController: UITableViewController {
             return UITableViewAutomaticDimension
         }
     }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let section = mentions[indexPath.section]
+        let sectionTitle = section.title
+        let mention = section.data[indexPath.row]
+
+        let cell = tableView.cellForRow(at: indexPath)
+        
+        switch sectionTitle {
+        case "Images":
+            performSegue(withIdentifier: "ImageCell", sender: indexPath)
+        case "Hashtags":
+            performSegue(withIdentifier: "KeywordCell", sender: indexPath)
+        case "Users":
+            performSegue(withIdentifier: "KeywordCell", sender: indexPath)
+        case "Urls":
+            if case .Keyword(let url) = mention {
+                if let url = URL(string: url) {
+                    let svc = SFSafariViewController(url: url)
+                    self.present(svc, animated: true, completion: nil)
+                }
+            }
+        default:
+            break
+        }
+    }
 
     // MARK: - Navigation
      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier! == "KeywordCell" {
-            if let tweetTable = segue.destination as? TweetTableViewController,
-                let mentionKeywordCell = sender as? MentionKeywordTableViewCell,
-                let keyword = mentionKeywordCell.keyword {
-                tweetTable.searchText = keyword
-            }
-        } else {
-            if let imageView = segue.destination as? ImageViewController,
-                let mentionImageCell = sender as? MentionImageTableViewCell,
-                let url = mentionImageCell.url {
-                        imageView.imageURL = url
-            }
-        }
-    }
-    
-    // do not segue if clicked on URL
-    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
-        if let mentionKeywordCell = sender as? MentionKeywordTableViewCell,
-            let keyword = mentionKeywordCell.keyword,
-            let url = URL(string: keyword) {
-            if UIApplication.shared.canOpenURL(url) {
-                UIApplication.shared.open(url)
-                return false
+        if let indexPath = sender as? IndexPath {
+            let mention = mentions[indexPath.section].data[indexPath.row]
+            if segue.identifier! == "KeywordCell" {
+                if let tweetTable = segue.destination as? TweetTableViewController {
+                    if case .Keyword(let keyword) = mention {
+                        tweetTable.searchText = keyword
+                    }
+                }
             } else {
-                return true
+                if let imageView = segue.destination as? ImageViewController {
+                    if case .Image(let url, _) = mention {
+                        imageView.imageURL = url
+                    }
+                }
             }
-        } else {
-            return true
         }
     }
-    
-
 }

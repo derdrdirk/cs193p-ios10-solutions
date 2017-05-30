@@ -37,6 +37,12 @@ class ImageViewController: UIViewController
     }
 
     // MARK: View Controller Lifecycle
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        addPopToRootButton()
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         if image == nil { // we're about to appear on screen so, if needed,
