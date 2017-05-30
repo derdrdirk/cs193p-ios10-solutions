@@ -1,2 +1,2 @@
 # Assignment IV: Smashing Mentions
-![](https://media.giphy.com/media/l4FGu9AlEISYTiSpW/giphy.gif)
+![](https://github.com/Knowledge91/cs193p-ios10-solutions/blob/master/4.gif)
