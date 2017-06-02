@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="12141" systemVersion="16F73" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="Smashtag">
+    <entity name="DBMention" representedClassName=".DBMention" syncable="YES" codeGenerationType="category">
+        <attribute name="count" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="keyword" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="query" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="mentionTweets" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="DBTweet" inverseName="mentions" inverseEntity="DBTweet" syncable="YES"/>
+    </entity>
+    <entity name="DBSearch" representedClassName=".DBSearch" syncable="YES" codeGenerationType="category">
+        <attribute name="query" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="tweets" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="DBTweet" inverseName="searches" inverseEntity="DBTweet" syncable="YES"/>
+    </entity>
+    <entity name="DBTweet" representedClassName=".DBTweet" syncable="YES" codeGenerationType="category">
+        <attribute name="identifier" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="mentions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="DBMention" inverseName="mentionTweets" inverseEntity="DBMention" syncable="YES"/>
+        <relationship name="searches" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="DBSearch" inverseName="tweets" inverseEntity="DBSearch" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="DBMention" positionX="-38" positionY="-288" width="128" height="103"/>
+        <element name="DBSearch" positionX="-486" positionY="-279" width="144" height="75"/>
+        <element name="DBTweet" positionX="-270" positionY="-288" width="144" height="88"/>
+    </elements>
+</model>
